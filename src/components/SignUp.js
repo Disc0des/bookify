@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
 
 const initialState = {
   fields: {
@@ -22,26 +22,12 @@ function SignUp() {
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signup } = useAuth();
 
-  // eslint-disable-next-line consistent-return
   async function handleSubmit(e) {
     e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      setError("Passwords do not match");
-    }
-
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-      setError("Unable to create account");
-    }
-
+    setLoading(true);
+    // insert funcionality here
+    setError("");
     setLoading(false);
   }
 
@@ -53,7 +39,7 @@ function SignUp() {
     <div>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">bookify - Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="first-name">
@@ -127,12 +113,20 @@ function SignUp() {
                 onChange={handleFieldChange}
               />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button
+              disabled={loading}
+              className="w-100"
+              type="submit"
+              style={{ marginTop: "20px" }}
+            >
               Sign Up
             </Button>
           </Form>
         </Card.Body>
       </Card>
+      <div className="w-100 text-center mt-2">
+        Already have an account? <Link to="/login">Log in</Link>
+      </div>
     </div>
   );
 }
