@@ -1,7 +1,16 @@
 import React from "react";
+import UserNavbar from "./UserNavbar";
+import AdminNavbar from "./AdminNavbar";
+import SuperUserNavbar from "./SuperUserNavbar";
 
-function Dashboard() {
-  return <div>Dashboard</div>;
+function Dashboard(userRole) {
+  return (
+    <div>
+      {userRole === "user" && <UserNavbar />}
+      {userRole === "admin" && <AdminNavbar />}
+      {userRole === "superuser" && <SuperUserNavbar />}
+    </div>
+  );
 }
 
 export default Dashboard;

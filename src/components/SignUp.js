@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Card, Alert } from "react-bootstrap";
+import logo from "../bookify-logo.png";
 
 const initialState = {
   fields: {
@@ -26,7 +27,7 @@ function SignUp() {
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    // insert funcionality here
+    // TODO: insert backend calls
     setError("");
     setLoading(false);
   }
@@ -39,7 +40,7 @@ function SignUp() {
     <div>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">bookify - Sign Up</h2>
+          <img src={logo} alt="bookify-logo" className="bookify-logo" />
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="first-name">

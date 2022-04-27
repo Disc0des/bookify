@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import logo from "../bookify-logo.png";
 
 export default function ForgotPassword() {
   const emailRef = useRef();
@@ -14,7 +15,7 @@ export default function ForgotPassword() {
     setLoading(true);
     setError("Email address was not recognised");
     setMessage("Check your inbox for a reset link");
-    // enter functionality here
+    // TODO: Insert backend call
     setLoading(false);
   }
 
@@ -22,7 +23,7 @@ export default function ForgotPassword() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Password Reset</h2>
+          <img src={logo} alt="bookify-logo" className="bookify-logo" />
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>

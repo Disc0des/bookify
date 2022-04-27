@@ -2,6 +2,8 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import logo from "../bookify-logo.png";
+import "../styles/Login.css";
 
 export default function Login() {
   const emailRef = useRef();
@@ -11,7 +13,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // insert funtionality here
+    // TODO: Insert backend call
     setError("");
     setLoading(false);
   }
@@ -20,7 +22,7 @@ export default function Login() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Welcome to bookify</h2>
+          <img src={logo} alt="bookify-logo" className="bookify-logo" />
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">

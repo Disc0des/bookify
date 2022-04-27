@@ -9,6 +9,7 @@ import ForgotPassword from "./ForgotPassword";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  // TODO: Pull "role" from the backend and save it as state, then pass this down to Dashboard as props
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
