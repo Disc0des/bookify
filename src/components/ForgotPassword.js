@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../bookify-logo.png";
 
-export default function ForgotPassword() {
+function ForgotPassword() {
   const emailRef = useRef();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -51,3 +51,5 @@ export default function ForgotPassword() {
     </>
   );
 }
+
+export default ForgotPassword;

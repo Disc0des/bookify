@@ -5,7 +5,7 @@ import SuperUserNavbar from "./SuperUserNavbar";
 
 function Dashboard(userRole) {
   return (
-    <div>
+    <div className="navbar-container">
       {userRole === "user" && <UserNavbar />}
       {userRole === "admin" && <AdminNavbar />}
       {userRole === "superuser" && <SuperUserNavbar />}

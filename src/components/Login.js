@@ -17,7 +17,8 @@ export default function Login() {
     setError("");
     setLoading(false);
   }
-
+  // eslint-disable-next-line no-console
+  console.log("hi");
   return (
     <>
       <Card>
