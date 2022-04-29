@@ -5,12 +5,18 @@ import "../styles/Navbar.css";
 
 function UserNavbar() {
   const [active, setActive] = useState("navbar-links");
+  const [toggleIcon, setToggleIcon] = useState("nav-toggler");
 
   const navToggle = () => {
     if (active === "navbar-links") {
       setActive("navbar-links navbar-active");
     } else {
       setActive("navbar-links");
+    }
+    if (toggleIcon === "nav-toggler") {
+      setToggleIcon("nav-toggler toggle");
+    } else {
+      setToggleIcon("nav-toggler");
     }
   };
 
@@ -36,7 +42,7 @@ function UserNavbar() {
           </button>
         </li>
       </ul>
-      <button onClick={navToggle} type="button" className="nav-toggler">
+      <button onClick={navToggle} type="button" className={toggleIcon}>
         <div className="line1" />
         <div className="line2" />
         <div className="line3" />

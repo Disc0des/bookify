@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import PrivateRoute from "./PrivateRoute";
 
 //* Navbar Imports
-// import UserNavbar from "./UserNavbar";
+import UserNavbar from "./UserNavbar";
 // import AdminNavbar from "./AdminNavbar";
-import SuperUserNavbar from "./SuperUserNavbar";
+// import SuperUserNavbar from "./SuperUserNavbar";
 
 //* Entry Pages Imports
 import SignUp from "./SignUp";
@@ -36,7 +36,7 @@ function App() {
   // TODO: Superusernavbar needs styling to a sidebar only
   return (
     <Router>
-      <SuperUserNavbar />
+      <UserNavbar />
       {/* {userRole === "admin" && <AdminNavbar />}
       {userRole === "superuser" && <SuperUserNavbar />} */}
       <Switch>

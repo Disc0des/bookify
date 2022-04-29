@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navbarLogo from "../bookify-navbar-logo.png";
-import "../styles/Navbar.css";
+import "../styles/SuperUserNavbar.css";
 
 function SuperUserNavbar() {
   const [active, setActive] = useState("navbar-links");

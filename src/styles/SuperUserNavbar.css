@@ -1,0 +1,78 @@
+.navbar-logo {
+  height: 3.5rem;
+  margin: 1rem 0 1rem 0.5rem;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  height: 4rem;
+}
+
+.logout-button {
+  background: white;
+  border: none;
+  color: var(--primary);
+}
+
+.logout-button:hover,
+.navbar-link-items a:hover {
+  color: #0d6efd;
+}
+
+/* Specific styling to overide bootstrap */
+.navbar-link-items a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.nav-toggler div {
+  width: 2.5rem;
+  height: 0.2rem;
+  margin: 0.4rem;
+  background: var(--primary);
+  transition: 0.4s ease-in;
+}
+
+.nav-toggler {
+  cursor: pointer;
+  display: none;
+  display: block;
+  background: white;
+  border: none;
+}
+
+.navbar-links {
+  display: flex;
+  position: fixed;
+  top: 4rem;
+  right: 0;
+  width: 15rem;
+  height: calc(100vh - 4rem);
+  background: white;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  align-items: center;
+  list-style-type: none;
+  padding: 10px 0 0 0;
+  margin-top: 0px;
+  transform: translateX(100%);
+  transition: 0.4s ease-in;
+}
+
+.navbar-active {
+  transform: translateX(0);
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-7.5px, 5px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-7.5px, -5px);
+}
