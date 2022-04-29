@@ -6,18 +6,17 @@ import logo from "../bookify-logo.png";
 
 const initialState = {
   fields: {
+    username: "",
     email: "",
     firstName: "",
-    surname: "",
-    firstLine: "",
-    postcode: "",
+    lastName: "",
     password: "",
     passwordConfirm: "",
   },
 };
 
 function SignUp() {
-  const emailRef = useRef();
+  const usernameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [fields, setFields] = useState(initialState.fields);
@@ -28,6 +27,8 @@ function SignUp() {
     e.preventDefault();
     setLoading(true);
     // TODO: insert backend calls
+    // TODO: assert that all fields have been completed
+    // TODO: passwords over 8 char and placeholders
     setError("");
     setLoading(false);
   }
@@ -43,73 +44,76 @@ function SignUp() {
           <img src={logo} alt="bookify-logo" className="bookify-logo" />
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="username">
+              <Form.Label style={{ marginBottom: "0px" }}>Username</Form.Label>
+              <Form.Control
+                id="username"
+                name="username"
+                type="text"
+                value={fields.username}
+                ref={usernameRef}
+                style={{ marginBottom: "1rem" }}
+                onChange={handleFieldChange}
+              />
+            </Form.Group>
             <Form.Group id="first-name">
-              <Form.Label>First Name</Form.Label>
+              <Form.Label style={{ marginBottom: "0px" }}>
+                First Name
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="firstName"
                 value={fields.firstName}
+                style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
             </Form.Group>
-            <Form.Group id="surname">
-              <Form.Label>Surname</Form.Label>
+            <Form.Group id="lastName">
+              <Form.Label style={{ marginBottom: "0px" }}>Surname</Form.Label>
               <Form.Control
                 type="text"
-                name="surname"
-                value={fields.surname}
-                onChange={handleFieldChange}
-              />
-            </Form.Group>
-            <Form.Group id="first-line">
-              <Form.Label>First Line of Address</Form.Label>
-              <Form.Control
-                id="firstLine"
-                name="firstLine"
-                type="text"
-                value={fields.firstLine}
-                onChange={handleFieldChange}
-              />
-            </Form.Group>
-            <Form.Group id="postcode">
-              <Form.Label>Postcode</Form.Label>
-              <Form.Control
-                id="postcode"
-                name="postcode"
-                type="text"
-                value={fields.postcode}
+                name="lastName"
+                value={fields.lastName}
+                style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
             </Form.Group>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label style={{ marginBottom: "0px" }}>Email</Form.Label>
               <Form.Control
                 id="email"
                 name="email"
                 type="email"
                 value={fields.email}
-                ref={emailRef}
+                style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Choose a Password</Form.Label>
+              <Form.Label style={{ marginBottom: "0px" }}>
+                Choose a Password
+              </Form.Label>
               <Form.Control
                 id="password"
                 name="password"
                 type="password"
                 value={fields.password}
+                style={{ marginBottom: "1rem" }}
+                placeholder="Must be at least 8 characters"
                 ref={passwordRef}
                 onChange={handleFieldChange}
               />
             </Form.Group>
             <Form.Group id="passwordConfirm">
-              <Form.Label>Confirm your Password</Form.Label>
+              <Form.Label style={{ marginBottom: "0px" }}>
+                Confirm your Password
+              </Form.Label>
               <Form.Control
                 id="passwordConfirm"
                 name="passwordConfirm"
                 type="password"
                 value={fields.passwordConfirm}
+                placeholder="Must be at least 8 characters"
                 ref={passwordConfirmRef}
                 onChange={handleFieldChange}
               />

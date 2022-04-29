@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 2rem;
   margin: 0px;
   list-style-type: none;
   padding: 0 1rem 0 1rem;
@@ -38,10 +38,11 @@
 }
 
 .nav-toggler div {
-  width: 3rem;
+  width: 2.5rem;
   height: 0.2rem;
   margin: 0.4rem;
   background: var(--primary);
+  transition: 0.4s ease-in;
 }
 
 .nav-toggler {
@@ -63,12 +64,24 @@
     height: calc(100vh - 4rem);
     background: white;
     flex-direction: column;
-    justify-content: start;
-    padding: 1rem 0 1rem 0;
+    justify-content: flex-start;
+    padding: 0px;
+    margin: 0px;
     transform: translateX(100%);
+    transition: 0.4s ease-in;
   }
 }
 
 .navbar-active {
   transform: translateX(0);
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-7.5px, 5px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-7.5px, -5px);
 }

@@ -1,8 +1,7 @@
-/* eslint-disable no-lone-blocks */
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navbarLogo from "../bookify-navbar-logo.png";
-import "../styles/UserNavbar.css";
+import "../styles/Navbar.css";
 
 function UserNavbar() {
   const [active, setActive] = useState("navbar-links");
