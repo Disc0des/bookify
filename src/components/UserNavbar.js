@@ -1,25 +1,43 @@
-import React from "react";
-import { Link } from "react-router-dom";
+/* eslint-disable no-lone-blocks */
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import navbarLogo from "../bookify-navbar-logo.png";
+import "../styles/UserNavbar.css";
 
 function UserNavbar() {
+  const [active, setActive] = useState("navbar-links");
+  const navToggle = () => {
+    active === "navbar-links"
+      ? setActive("navbar-links navbar-active")
+      : setActive("navbar-links");
+  };
   return (
-    <div className="navbar-container">
-      logo
+    <div className={active}>
+      <img src={navbarLogo} alt="navbar-logo" className="navbar-logo" />
       <ul className="navbar-links">
-        <li>
-          <Link to="/user-services">Services</Link>
+        <li className="navbar-link-items">
+          <NavLink to="/user-services">Services</NavLink>
         </li>
-        <li>
-          <Link to="/make-booking">Bookings</Link>
+        <li className="navbar-link-items">
+          <NavLink to="/make-booking">Bookings</NavLink>
         </li>
-        <li>
-          <Link to="/update-details">Update Details</Link>
+        <li className="navbar-link-items">
+          <NavLink to="/update-details">My Details</NavLink>
         </li>
-        <li>
-          <Link to="/checkout">Checkout</Link>
+        <li className="navbar-link-items">
+          <NavLink to="/checkout">Checkout</NavLink>
+        </li>
+        <li className="navbar-link-items">
+          <button type="submit" className="logout-button">
+            Logout
+          </button>
         </li>
       </ul>
-      <button type="submit">Logout</button>
+      <button onClick={navToggle} type="button" className="nav-toggler">
+        <div className="line1" />
+        <div className="line2" />
+        <div className="line3" />
+      </button>
     </div>
   );
 }

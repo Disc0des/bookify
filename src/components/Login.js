@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../bookify-logo.png";
-import "../styles/Login.css";
 
 export default function Login() {
   const emailRef = useRef();
@@ -17,8 +16,7 @@ export default function Login() {
     setError("");
     setLoading(false);
   }
-  // eslint-disable-next-line no-console
-  console.log("hi");
+
   return (
     <>
       <Card>
