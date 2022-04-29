@@ -6,15 +6,19 @@ import "../styles/UserNavbar.css";
 
 function UserNavbar() {
   const [active, setActive] = useState("navbar-links");
+
   const navToggle = () => {
-    active === "navbar-links"
-      ? setActive("navbar-links navbar-active")
-      : setActive("navbar-links");
+    if (active === "navbar-links") {
+      setActive("navbar-links navbar-active");
+    } else {
+      setActive("navbar-links");
+    }
   };
+
   return (
-    <div className={active}>
+    <div className="navbar-container">
       <img src={navbarLogo} alt="navbar-logo" className="navbar-logo" />
-      <ul className="navbar-links">
+      <ul className={active}>
         <li className="navbar-link-items">
           <NavLink to="/user-services">Services</NavLink>
         </li>
