@@ -44,13 +44,13 @@ function SignUp() {
     } else
       axios
         .post("http://localhost:3000/api/users", fields)
+        // TODO: store JWT response and authenticate
         .then(() => {
           setMessage("Signup complete");
         })
-        .catch((err) => {
-          setError(err);
+        .catch(() => {
+          setError("Unable to connect to server");
         });
-    // TODO: insert backend calls
     setLoading(false);
   }
 

@@ -33,7 +33,6 @@ function App() {
   // const [userRole, setUserRole] = useState("");
   // setUserRole("user");
   // TODO: Pull "role" from the backend and save it as state, then pass this down to Dashboard as props
-  // TODO: Superusernavbar needs styling to a sidebar only
   return (
     <Router>
       <UserNavbar />
