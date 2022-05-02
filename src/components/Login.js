@@ -1,21 +1,43 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
 import logo from "../bookify-logo.png";
 
+const initialDetails = {
+  username: "",
+  password: "",
+};
 export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [details, setDetails] = useState(initialDetails);
+  const [token, setToken] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    // TODO: Insert backend call
     setError("");
+    setLoading("true");
+    e.preventDefault();
+    axios
+      .post("http://localhost:3000/api/users/authenticate", details)
+      .then((res) => {
+        setToken(res);
+        console.log(token);
+        <Redirect to="/" />;
+      })
+      .catch((err) => {
+        setError(err.detail);
+        console.log(error);
+      });
+    // TODO: Insert backend call
     setLoading(false);
   }
+
+  const handleDetailChange = (event) => {
+    setDetails({ ...details, [event.target.name]: event.target.value });
+  };
 
   return (
     <>
@@ -25,12 +47,24 @@ export default function Login() {
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                name="username"
+                value={details.username}
+                onChange={handleDetailChange}
+                required
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control
+                type="password"
+                name="password"
+                value={details.password}
+                onChange={handleDetailChange}
+                required
+              />
             </Form.Group>
             <Button
               disabled={loading}

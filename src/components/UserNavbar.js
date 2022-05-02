@@ -23,7 +23,10 @@ function UserNavbar() {
   return (
     <div className="navbar-container">
       <img src={navbarLogo} alt="navbar-logo" className="navbar-logo" />
-      <ul className={active}>
+      <ul className={active} style={{ paddingTop: "1rem" }}>
+        <li className="navbar-link-items">
+          <NavLink to="/">Dashboard</NavLink>
+        </li>
         <li className="navbar-link-items">
           <NavLink to="/user-services">Services</NavLink>
         </li>

@@ -21,7 +21,7 @@ function AdminNavbar() {
   };
 
   return (
-    <div className="navbar-container">
+    <div className="navbar-container" style={{ paddingTop: "1rem" }}>
       <img src={navbarLogo} alt="navbar-logo" className="navbar-logo" />
       <ul className={active}>
         <li className="navbar-link-items">

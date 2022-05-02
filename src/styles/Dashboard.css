@@ -1,0 +1,16 @@
+.dashboard-container {
+  height: auto;
+  margin-top: 4rem;
+  width: 100vw;
+  display: block;
+  scroll-behavior: smooth;
+}
+
+.dashboard-page1 {
+  height: calc(100vh - 4rem);
+  background-color: var(--primary);
+}
+.dashboard-page2 {
+  height: calc(100vh - 4rem);
+  background-color: lightgrey;
+}
