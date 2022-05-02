@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import logo from "../bookify-logo.png";
@@ -7,7 +9,7 @@ import logo from "../bookify-logo.png";
 const initialState = {
   fields: {
     username: "",
-    email: "",
+    emailAddress: "",
     firstName: "",
     lastName: "",
     password: "",
@@ -22,14 +24,33 @@ function SignUp() {
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    // TODO: insert backend calls
-    // TODO: assert that all fields have been completed
-    // TODO: passwords over 8 char and placeholders
+  function handleSubmit(e) {
     setError("");
+    setLoading(true);
+    e.preventDefault();
+    if (fields.password !== fields.passwordConfirm) {
+      setError("Your passwords do not match");
+    } else if (fields.password.length < 8) {
+      setError("Your password must be at least 8 characters");
+    } else if (
+      !fields.username ||
+      !fields.firstName ||
+      !fields.lastName ||
+      !fields.emailAddress
+    ) {
+      setError("Please fill in all the details");
+    } else
+      axios
+        .post("http://localhost:3000/api/users", fields)
+        // TODO: store JWT response and authenticate
+        .then(() => {
+          setMessage("Signup complete");
+        })
+        .catch(() => {
+          setError("Unable to connect to server");
+        });
     setLoading(false);
   }
 
@@ -42,7 +63,16 @@ function SignUp() {
       <Card>
         <Card.Body>
           <img src={logo} alt="bookify-logo" className="bookify-logo" />
-          {error && <Alert variant="danger">{error}</Alert>}
+          {error && (
+            <Alert variant="danger" style={{ textAlign: "center" }}>
+              {error}
+            </Alert>
+          )}
+          {message && (
+            <Alert variant="success" style={{ textAlign: "center " }}>
+              {message}
+            </Alert>
+          )}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="username">
               <Form.Label style={{ marginBottom: "0px" }}>Username</Form.Label>
@@ -82,9 +112,9 @@ function SignUp() {
               <Form.Label style={{ marginBottom: "0px" }}>Email</Form.Label>
               <Form.Control
                 id="email"
-                name="email"
+                name="emailAddress"
                 type="email"
-                value={fields.email}
+                value={fields.emailAddress}
                 style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
