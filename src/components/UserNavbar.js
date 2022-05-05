@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import Context from "../utils/Context";
 import navbarLogo from "../bookify-navbar-logo.png";
 import "../styles/Navbar.css";
 
 function UserNavbar() {
+  const { setIsLoggedIn } = useContext(Context);
   const [active, setActive] = useState("navbar-links");
   const [toggleIcon, setToggleIcon] = useState("nav-toggler");
+
+  const handleOnClick = () => {
+    setIsLoggedIn(false);
+    window.location = "/login";
+  };
 
   const navToggle = () => {
     if (active === "navbar-links") {
@@ -40,7 +47,11 @@ function UserNavbar() {
           <NavLink to="/checkout">Checkout</NavLink>
         </li>
         <li className="navbar-link-items">
-          <button type="submit" className="logout-button">
+          <button
+            type="submit"
+            className="logout-button"
+            onClick={handleOnClick}
+          >
             Logout
           </button>
         </li>

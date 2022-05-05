@@ -1,9 +1,12 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import Context from "../utils/Context";
 import logo from "../bookify-logo.png";
 
 const initialDetails = {
@@ -11,29 +14,42 @@ const initialDetails = {
   password: "",
 };
 export default function Login() {
+  const { setUserRole, setIsLoggedIn } = useContext(Context);
   const [details, setDetails] = useState(initialDetails);
-  const [token, setToken] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [storedToken, setStoredToken] = useState(null);
 
-  async function handleSubmit(e) {
+  //* This calls the backend when the form is submitted to get a jwt
+  function handleSubmit(e) {
     setError("");
-    setLoading("true");
+    setLoading(true);
     e.preventDefault();
     axios
       .post("http://localhost:3000/api/users/authenticate", details)
       .then((res) => {
-        setToken(res);
-        console.log(token);
-        <Redirect to="/" />;
+        setStoredToken(res.data.token);
+        setLoading(false);
       })
+
       .catch((err) => {
         setError(err.detail);
-        console.log(error);
+        setLoading(false);
       });
-    // TODO: Insert backend call
-    setLoading(false);
   }
+  //* This refreshes the page and gets user role whenever a new token is received
+  useEffect(() => {
+    if (!storedToken) {
+      return null;
+    }
+    const decodedToken = jwtDecode(storedToken);
+    const { role_id } = decodedToken;
+    axios.get(`http://localhost:3000/api/roles/${role_id}`).then((res) => {
+      setUserRole(res.data.role);
+      setIsLoggedIn(true);
+    });
+    return null;
+  }, [storedToken]);
 
   const handleDetailChange = (event) => {
     setDetails({ ...details, [event.target.name]: event.target.value });

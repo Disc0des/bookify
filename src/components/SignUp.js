@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useRef } from "react";
 import axios from "axios";
@@ -9,13 +8,19 @@ import logo from "../bookify-logo.png";
 const initialState = {
   fields: {
     username: "",
-    emailAddress: "",
-    firstName: "",
-    lastName: "",
+    email_address: "",
+    first_name: "",
+    last_name: "",
     password: "",
     passwordConfirm: "",
   },
 };
+
+//* This function redirects the user to login upon succesful signup
+// const redirect = () => {
+//   window.location = "/";
+// };
+// const redirectOnSignUp = setTimeout(redirect, 1000);
 
 function SignUp() {
   const usernameRef = useRef();
@@ -36,21 +41,22 @@ function SignUp() {
       setError("Your password must be at least 8 characters");
     } else if (
       !fields.username ||
-      !fields.firstName ||
-      !fields.lastName ||
-      !fields.emailAddress
+      !fields.first_name ||
+      !fields.last_name ||
+      !fields.email_address
     ) {
       setError("Please fill in all the details");
     } else
       axios
         .post("http://localhost:3000/api/users", fields)
-        // TODO: store JWT response and authenticate
         .then(() => {
-          setMessage("Signup complete");
+          setMessage("Signup complete, please now login");
+          // redirectOnSignUp();
         })
-        .catch(() => {
-          setError("Unable to connect to server");
+        .catch((err) => {
+          setError(err.detail);
         });
+
     setLoading(false);
   }
 
@@ -92,8 +98,8 @@ function SignUp() {
               </Form.Label>
               <Form.Control
                 type="text"
-                name="firstName"
-                value={fields.firstName}
+                name="first_name"
+                value={fields.first_name}
                 style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
@@ -102,8 +108,8 @@ function SignUp() {
               <Form.Label style={{ marginBottom: "0px" }}>Surname</Form.Label>
               <Form.Control
                 type="text"
-                name="lastName"
-                value={fields.lastName}
+                name="last_name"
+                value={fields.last_name}
                 style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
@@ -112,9 +118,9 @@ function SignUp() {
               <Form.Label style={{ marginBottom: "0px" }}>Email</Form.Label>
               <Form.Control
                 id="email"
-                name="emailAddress"
+                name="email_address"
                 type="email"
-                value={fields.emailAddress}
+                value={fields.email_address}
                 style={{ marginBottom: "1rem" }}
                 onChange={handleFieldChange}
               />
