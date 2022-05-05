@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
+import Context from "../utils/Context";
 
-function PrivateRoute({ component: Component, isLoggedIn, ...rest }) {
+function PrivateRoute({ component: Component, ...rest }) {
+  const { isLoggedIn } = useContext(Context);
   return (
     <Route
       {...rest}

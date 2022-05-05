@@ -7,7 +7,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-// import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import Context from "../utils/Context";
 
 //* Navbar Imports
@@ -40,7 +40,7 @@ function App() {
   const [userRole, setUserRole] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const value = { userRole, setUserRole, isLoggedIn, setIsLoggedIn };
-  // TODO: Pull "role" from the backend and save it as state, then pass this down to Dashboard as props
+  // TODO: test different user roles to make sure correct navbar loads
   return (
     <Router>
       <Context.Provider value={value}>
@@ -51,14 +51,14 @@ function App() {
         {userRole === "superuser" && <SuperUserNavbar />}
         <Switch>
           <Route exact path="/" component={Dashboard} />
-          <Route path="/user-services" component={UserServices} />
-          <Route path="/make-booking" component={UserBookings} />
-          <Route path="/update-details" component={UserUpdateDetails} />
-          <Route path="/checkout" component={UserCheckout} />
-          <Route path="/my-calender" component={AdminCalender} />
-          <Route path="/contacts" component={AdminContacts} />
-          <Route path="/update-services" component={AdminServices} />
-          <Route path="/change-roles" component={SuperUserRoles} />
+          <PrivateRoute path="/user-services" component={UserServices} />
+          <PrivateRoute path="/make-booking" component={UserBookings} />
+          <PrivateRoute path="/update-details" component={UserUpdateDetails} />
+          <PrivateRoute path="/checkout" component={UserCheckout} />
+          <PrivateRoute path="/my-calender" component={AdminCalender} />
+          <PrivateRoute path="/contacts" component={AdminContacts} />
+          <PrivateRoute path="/update-services" component={AdminServices} />
+          <PrivateRoute path="/change-roles" component={SuperUserRoles} />
           <Container
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
