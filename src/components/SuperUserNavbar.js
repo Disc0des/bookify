@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import navbarLogo from "../bookify-navbar-logo.png";
+import Context from "../utils/Context";
 import "../styles/SuperUserNavbar.css";
 
 function SuperUserNavbar() {
+  const { setIsLoggedIn } = useContext(Context);
   const [active, setActive] = useState("navbar-links");
   const [toggleIcon, setToggleIcon] = useState("nav-toggler");
 
@@ -18,6 +20,11 @@ function SuperUserNavbar() {
     } else {
       setToggleIcon("nav-toggler");
     }
+  };
+
+  const handleOnClick = () => {
+    setIsLoggedIn(false);
+    window.location = "/login";
   };
 
   return (
@@ -49,7 +56,11 @@ function SuperUserNavbar() {
           <NavLink to="/checkout">Checkout</NavLink>
         </li>
         <li className="navbar-link-items">
-          <button type="submit" className="logout-button">
+          <button
+            type="submit"
+            className="logout-button"
+            onClick={handleOnClick}
+          >
             Logout
           </button>
         </li>
