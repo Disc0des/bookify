@@ -50,7 +50,7 @@ function App() {
         {userRole === "admin" && <AdminNavbar />}
         {userRole === "superuser" && <SuperUserNavbar />}
         <Switch>
-          <Route exact path="/" component={Dashboard} />
+          <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute path="/user-services" component={UserServices} />
           <PrivateRoute path="/make-booking" component={UserBookings} />
           <PrivateRoute path="/update-details" component={UserUpdateDetails} />
