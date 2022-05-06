@@ -8,6 +8,7 @@ import {
   Appointments,
   Scheduler,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import "../styles/AdminCalendar.css";
 
 function AdminCalender() {
   const schedulerData = [
@@ -24,7 +25,7 @@ function AdminCalender() {
   ];
 
   return (
-    <div id="AdminCalender">
+    <div className="AdminCalendar">
       <Scheduler data={schedulerData}>
         <ViewState />
         <WeekView startDayHour={8} endDayHour={18} />
