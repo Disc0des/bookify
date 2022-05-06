@@ -10,7 +10,7 @@ function AdminAddCalender() {
   const initialState = {
     calender: {
       title: "",
-      user_id: { userId },
+      user_id: userId,
     },
   };
   const [calender, setcalender] = useState(initialState.calender);

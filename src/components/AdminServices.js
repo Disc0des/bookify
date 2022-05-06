@@ -10,7 +10,7 @@ const initialState = {
     description: "",
     duration: 0,
     price: 0,
-    calender_id: 1,
+    calendar_id: 2,
   },
 };
 
@@ -21,6 +21,7 @@ function AdminServices() {
   const [message, setMessage] = useState("");
 
   function handleSubmit(e) {
+    console.log(service);
     setError("");
     setLoading(true);
     e.preventDefault();
@@ -33,7 +34,7 @@ function AdminServices() {
       setError("Please fill in all the details");
     } else {
       axios
-        .post("http://localhost:3000/api/service", service)
+        .post("http://localhost:3000/api/services", service)
         .then(() => {
           setMessage("Service succesfully added!");
         })
@@ -90,7 +91,7 @@ function AdminServices() {
             </Form.Group>
             <Form.Group id="duration">
               <Form.Label style={{ marginBottom: "0px" }}>
-                Duration (hours)
+                Duration (mins)
               </Form.Label>
               <Form.Control
                 type="number"
