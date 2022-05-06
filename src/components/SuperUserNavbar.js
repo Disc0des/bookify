@@ -9,16 +9,17 @@ function SuperUserNavbar() {
   const [active, setActive] = useState("navbar-links");
   const [toggleIcon, setToggleIcon] = useState("nav-toggler");
 
+  //* this function pops the side bar in
   const navToggle = () => {
     if (active === "navbar-links") {
-      setActive("navbar-links navbar-active");
+      setActive("Snavbar-links Snavbar-active");
     } else {
-      setActive("navbar-links");
+      setActive("Snavbar-links");
     }
     if (toggleIcon === "nav-toggler") {
-      setToggleIcon("nav-toggler toggle");
+      setToggleIcon("Snav-toggler Stoggle");
     } else {
-      setToggleIcon("nav-toggler");
+      setToggleIcon("Snav-toggler");
     }
   };
 
@@ -28,37 +29,37 @@ function SuperUserNavbar() {
   };
 
   return (
-    <div className="navbar-container">
-      <img src={navbarLogo} alt="navbar-logo" className="navbar-logo" />
+    <div className="Snavbar-container">
+      <img src={navbarLogo} alt="navbar-logo" className="Snavbar-logo" />
       <ul className={active}>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/change-roles">User Roles</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/user-services">Services</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/make-booking">Bookings</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/update-details">My Details</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/my-calender">My Calender</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/contacts">Contacts</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/update-services">Update Services</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <NavLink to="/checkout">Checkout</NavLink>
         </li>
-        <li className="navbar-link-items">
+        <li className="Snavbar-link-items">
           <button
             type="submit"
-            className="logout-button"
+            className="Slogout-button"
             onClick={handleOnClick}
           >
             Logout
@@ -66,9 +67,9 @@ function SuperUserNavbar() {
         </li>
       </ul>
       <button onClick={navToggle} type="button" className={toggleIcon}>
-        <div className="line1" />
-        <div className="line2" />
-        <div className="line3" />
+        <div className="Sline1" />
+        <div className="Sline2" />
+        <div className="Sline3" />
       </button>
     </div>
   );

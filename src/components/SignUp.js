@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button, Card, Alert, ButtonGroup } from "react-bootstrap";
 import logo from "../bookify-logo.png";
 
 const initialState = {
@@ -13,14 +13,9 @@ const initialState = {
     last_name: "",
     password: "",
     passwordConfirm: "",
+    role_name: "",
   },
 };
-
-//* This function redirects the user to login upon succesful signup
-// const redirect = () => {
-//   window.location = "/";
-// };
-// const redirectOnSignUp = setTimeout(redirect, 1000);
 
 function SignUp() {
   const usernameRef = useRef();
@@ -30,6 +25,10 @@ function SignUp() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  function handleOnClick(event) {
+    setFields({ ...fields, [event.target.name]: event.target.value });
+  }
 
   function handleSubmit(e) {
     setError("");
@@ -43,20 +42,20 @@ function SignUp() {
       !fields.username ||
       !fields.first_name ||
       !fields.last_name ||
-      !fields.email_address
+      !fields.email_address ||
+      !fields.role_name
     ) {
       setError("Please fill in all the details");
-    } else
+    } else {
       axios
         .post("http://localhost:3000/api/users", fields)
         .then(() => {
           setMessage("Signup complete, please now login");
-          // redirectOnSignUp();
         })
         .catch((err) => {
           setError(err.detail);
         });
-
+    }
     setLoading(false);
   }
 
@@ -65,7 +64,7 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <div className="services-container">
       <Card>
         <Card.Body>
           <img src={logo} alt="bookify-logo" className="bookify-logo" />
@@ -125,6 +124,18 @@ function SignUp() {
                 onChange={handleFieldChange}
               />
             </Form.Group>
+            <p style={{ marginBottom: "0px" }}>Please select a user type</p>
+            <ButtonGroup
+              className="mb-2 w-100"
+              style={{ maxWidth: "400px", paddingBottom: "1rem" }}
+            >
+              <Button name="role_name" value="customer" onClick={handleOnClick}>
+                Customer
+              </Button>
+              <Button name="role_name" value="company" onClick={handleOnClick}>
+                Business
+              </Button>
+            </ButtonGroup>
             <Form.Group id="password">
               <Form.Label style={{ marginBottom: "0px" }}>
                 Choose a Password

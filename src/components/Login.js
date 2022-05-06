@@ -9,13 +9,9 @@ import jwtDecode from "jwt-decode";
 import Context from "../utils/Context";
 import logo from "../bookify-logo.png";
 
-const initialDetails = {
-  username: "",
-  password: "",
-};
 export default function Login() {
-  const { setUserRole, setIsLoggedIn } = useContext(Context);
-  const [details, setDetails] = useState(initialDetails);
+  const { setUserId, setUserRole, setIsLoggedIn, details, setDetails } =
+    useContext(Context);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [storedToken, setStoredToken] = useState(null);
@@ -31,26 +27,29 @@ export default function Login() {
         setStoredToken(res.data.token);
         setLoading(false);
       })
-
       .catch((err) => {
         setError(err.detail);
         setLoading(false);
       });
   }
+
   //* This refreshes the page and gets user role whenever a new token is received
   useEffect(() => {
     if (!storedToken) {
       return null;
     }
     const decodedToken = jwtDecode(storedToken);
-    const { role_id } = decodedToken;
+    const { user_id, role_id } = decodedToken;
+    setUserId(user_id);
     axios.get(`http://localhost:3000/api/roles/${role_id}`).then((res) => {
       setUserRole(res.data.role);
       setIsLoggedIn(true);
+      console.log(details);
     });
     return null;
   }, [storedToken]);
 
+  //* This updates the details state as its typed into the form
   const handleDetailChange = (event) => {
     setDetails({ ...details, [event.target.name]: event.target.value });
   };
