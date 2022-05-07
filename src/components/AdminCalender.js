@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
   DateNavigator,
@@ -8,24 +8,40 @@ import {
   Appointments,
   Scheduler,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import axios from "axios";
 
 function AdminCalender() {
-  const schedulerData = [
-    {
-      startDate: "2022-05-02T09:00",
-      endDate: "2022-05-02T10:00",
-      title: "Sully",
-    },
-    {
-      startDate: "2022-05-03T12:00",
-      endDate: "2022-05-03T13:00",
-      title: "Buddy",
-    },
-  ];
+  const [bookingsMap, setBookingsMap] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/calendars/5/bookings")
+      .then((res) => {
+        const bookings = res.data;
+        return bookings;
+      })
+      .then((res) => {
+        const newArray = res.map((bookings) => {
+          const book = {
+            id: bookings.id,
+            title: bookings.title,
+            startDate: bookings.startDate,
+            endDate: bookings.endDate,
+            user_id: bookings.user_id,
+            service_id: bookings.service_id,
+          };
+          return book;
+        });
+        setBookingsMap(newArray);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [bookingsMap]);
 
   return (
     <div id="AdminCalender">
-      <Scheduler data={schedulerData}>
+      <Scheduler data={bookingsMap}>
         <ViewState />
         <WeekView startDayHour={8} endDayHour={18} />
         <Toolbar />

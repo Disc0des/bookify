@@ -46,6 +46,7 @@ function App() {
   const [userRole, setUserRole] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState();
+  const [booking, setBooking] = useState();
   const value = {
     userRole,
     setUserRole,
@@ -55,6 +56,8 @@ function App() {
     setDetails,
     setUserId,
     userId,
+    booking,
+    setBooking,
   };
   // TODO: test different user roles to make sure correct navbar loads
   return (
