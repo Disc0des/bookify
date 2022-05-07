@@ -26,9 +26,10 @@ export default function Login() {
       .then((res) => {
         setStoredToken(res.data.token);
         setLoading(false);
+        setIsLoggedIn(true);
       })
-      .catch((err) => {
-        setError(err.detail);
+      .catch(() => {
+        setError("Username or Password is incorrect");
         setLoading(false);
       });
   }
@@ -43,8 +44,6 @@ export default function Login() {
     setUserId(user_id);
     axios.get(`http://localhost:3000/api/roles/${role_id}`).then((res) => {
       setUserRole(res.data.role);
-      setIsLoggedIn(true);
-      console.log(details);
     });
     return null;
   }, [storedToken]);
@@ -55,49 +54,47 @@ export default function Login() {
   };
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <img src={logo} alt="bookify-logo" className="bookify-logo" />
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                value={details.username}
-                onChange={handleDetailChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={details.password}
-                onChange={handleDetailChange}
-                required
-              />
-            </Form.Group>
-            <Button
-              disabled={loading}
-              className="w-100"
-              style={{ marginTop: "20px" }}
-              type="submit"
-            >
-              Log In
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
-      </div>
-    </>
+    <Card>
+      <Card.Body>
+        <img src={logo} alt="bookify-logo" className="bookify-logo" />
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group id="email">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={details.username}
+              onChange={handleDetailChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group id="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={details.password}
+              onChange={handleDetailChange}
+              required
+            />
+          </Form.Group>
+          <Button
+            disabled={loading}
+            className="w-100"
+            style={{ marginTop: "20px" }}
+            type="submit"
+          >
+            Log In
+          </Button>
+        </Form>
+        <div className="w-100 text-center mt-3">
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </div>
+        <div className="w-100 text-center mt-2">
+          Need an account? <Link to="/signup">Sign Up</Link>
+        </div>
+      </Card.Body>
+    </Card>
   );
 }
