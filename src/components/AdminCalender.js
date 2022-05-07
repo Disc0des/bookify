@@ -8,7 +8,11 @@ import {
   Appointments,
   Scheduler,
 } from "@devexpress/dx-react-scheduler-material-ui";
+<<<<<<< HEAD
+import "../styles/AdminCalendar.css";
+=======
 import axios from "axios";
+>>>>>>> master
 
 function AdminCalender() {
   const [bookingsMap, setBookingsMap] = useState([]);
@@ -40,8 +44,13 @@ function AdminCalender() {
   }, [bookingsMap]);
 
   return (
+<<<<<<< HEAD
+    <div className="AdminCalendar">
+      <Scheduler data={schedulerData}>
+=======
     <div id="AdminCalender">
       <Scheduler data={bookingsMap}>
+>>>>>>> master
         <ViewState />
         <WeekView startDayHour={8} endDayHour={18} />
         <Toolbar />
