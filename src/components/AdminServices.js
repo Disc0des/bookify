@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import logo from "../bookify-logo.png";
+import "../styles/Services.css";
 
 const initialState = {
   service: {
@@ -51,9 +52,9 @@ function AdminServices() {
   };
 
   return (
-    <div>
+    <div className="services-container">
       <Card>
-        <Card.Body>
+        <Card.Body style={{ height: "auto" }}>
           <img src={logo} alt="bookify-logo" className="bookify-logo" />
           {error && (
             <Alert variant="danger" style={{ textAlign: "center" }}>

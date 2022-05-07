@@ -1,13 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
 
 body {
-  background-color: #e6e8fb;
+  background-color: var(--primary);
   font-family: "Poppins", sans-serif;
   margin: 0px;
   padding: 0px;
   --primary: #67a8d8;
+  --secondary: #74899b;
 }
 
+.card {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.container {
+  margin-bottom: 10rem;
+}
+
+.calender-container {
+  background-color: var(--secondary);
+}
 .bookify-logo {
   height: 15rem;
   width: 20rem;

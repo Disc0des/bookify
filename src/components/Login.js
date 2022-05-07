@@ -27,8 +27,8 @@ export default function Login() {
         setStoredToken(res.data.token);
         setLoading(false);
       })
-      .catch((err) => {
-        setError(err.detail);
+      .catch(() => {
+        setError("Username or Password is incorrect");
         setLoading(false);
       });
   }
@@ -44,7 +44,6 @@ export default function Login() {
     axios.get(`http://localhost:3000/api/roles/${role_id}`).then((res) => {
       setUserRole(res.data.role);
       setIsLoggedIn(true);
-      console.log(details);
     });
     return null;
   }, [storedToken]);
