@@ -24,7 +24,7 @@ function AdminCalender() {
   ];
 
   return (
-    <div id="AdminCalender" className="calender-container">
+    <div id="AdminCalender">
       <Scheduler data={schedulerData}>
         <ViewState />
         <WeekView startDayHour={8} endDayHour={18} />
