@@ -21,7 +21,7 @@ body {
 }
 
 .calender-container {
-  background-color: var(--secondary);
+  background-color: white;
 }
 .bookify-logo {
   height: 15rem;
