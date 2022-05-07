@@ -40,6 +40,9 @@ function AdminNavbar() {
           <NavLink to="/my-calender">My Calender</NavLink>
         </li>
         <li className="navbar-link-items">
+          <NavLink to="/update-calender">Add Calender</NavLink>
+        </li>
+        <li className="navbar-link-items">
           <NavLink to="/contacts">Contacts</NavLink>
         </li>
         <li className="navbar-link-items">

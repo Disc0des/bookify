@@ -1,0 +1,62 @@
+.container-image {
+  padding: 50px;
+  margin-top: 50px;
+}
+.form-container {
+  width: 400px;
+  background-color: white;
+  margin: 5rem auto 5rem auto;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 10px;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 30px;
+}
+.success-message {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 10px 2px 10px 2px;
+  background-color: white;
+  padding: 5px;
+  color: green;
+}
+.form-field {
+  margin: 10px 2px 10px 2px;
+  padding: 20px;
+  font-size: 15px;
+  border: solid #0d6efd 3px;
+  font-family: "Roboto", sans-serif;
+}
+span {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 15px;
+}
+input {
+  background: whitesmoke;
+}
+
+button {
+  margin: 1px 1px 1px 1px;
+  padding: 0.5rem;
+  font-size: 20px;
+  border-radius: 5px;
+  color: white;
+  background-color: #0d6efd;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
+button:hover,
+button--active {
+  background-color: white;
+  color: #0d6efd;
+}
