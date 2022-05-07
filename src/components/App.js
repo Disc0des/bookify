@@ -72,7 +72,6 @@ function App() {
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute path="/user-services" component={UserServices} />
           <PrivateRoute path="/make-booking" component={UserBookings} />
-          <PrivateRoute path="/update-details" component={UserUpdateDetails} />
           <PrivateRoute path="/checkout" component={UserCheckout} />
           <PrivateRoute path="/my-calender" component={AdminCalender} />
           <PrivateRoute path="/contacts" component={AdminContacts} />
@@ -83,6 +82,10 @@ function App() {
           >
             <div className="w-100" style={{ maxWidth: "400px" }}>
               <PrivateRoute path="/update-services" component={AdminServices} />
+              <PrivateRoute
+                path="/update-details"
+                component={UserUpdateDetails}
+              />
               <PrivateRoute
                 path="/update-calender"
                 component={AdminAddCalender}
