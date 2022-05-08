@@ -10,11 +10,16 @@ function ForgotPassword() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e) {
+  function messageTimeout() {
+    setMessage("");
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
     setError("Email address was not recognised");
     setMessage("Check your inbox for a reset link");
+    setTimeout(messageTimeout, 2000);
     // TODO: Insert backend call
     setLoading(false);
   }

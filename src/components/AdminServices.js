@@ -21,8 +21,11 @@ function AdminServices() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  function messageTimeout() {
+    setMessage("");
+  }
+
   function handleSubmit(e) {
-    console.log(service);
     setError("");
     setLoading(true);
     e.preventDefault();
@@ -38,6 +41,7 @@ function AdminServices() {
         .post("http://localhost:3000/api/services", service)
         .then(() => {
           setMessage("Service succesfully added!");
+          setTimeout(messageTimeout, 2000);
         })
         .catch((err) => {
           setError(err.detail);

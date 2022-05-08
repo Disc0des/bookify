@@ -31,6 +31,10 @@ function UserUpdateDetails() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  function messageTimeout() {
+    setMessage("");
+  }
+
   function handleSubmitDelivery(e) {
     setError("");
     setLoading(true);
@@ -47,7 +51,8 @@ function UserUpdateDetails() {
       axios
         .post("http://localhost:3000/api/users", fields)
         .then(() => {
-          setMessage("Signup complete, please now login");
+          setMessage("Your delivery details have been updted");
+          setTimeout(messageTimeout, 2000);
         })
         .catch((err) => {
           setError(err.detail);
@@ -68,7 +73,8 @@ function UserUpdateDetails() {
       axios
         .post("http://localhost:3000/api/users", fields)
         .then(() => {
-          setMessage("Signup complete, please now login");
+          setMessage("Your password has been updated");
+          setTimeout(messageTimeout, 2000);
         })
         .catch((err) => {
           setError(err.detail);
