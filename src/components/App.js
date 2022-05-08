@@ -21,7 +21,6 @@ import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
 
 import Dashboard from "./Dashboard";
-import SuperUserRoles from "./SuperUserRoles";
 
 //* User Pages Imports
 import UserServices from "./UserServices";
@@ -75,7 +74,6 @@ function App() {
           <PrivateRoute path="/checkout" component={UserCheckout} />
           <PrivateRoute path="/my-calender" component={AdminCalender} />
           <PrivateRoute path="/contacts" component={AdminContacts} />
-          <PrivateRoute path="/change-roles" component={SuperUserRoles} />
           <Container
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}

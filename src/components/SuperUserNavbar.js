@@ -33,9 +33,6 @@ function SuperUserNavbar() {
       <img src={navbarLogo} alt="navbar-logo" className="Snavbar-logo" />
       <ul className={active}>
         <li className="Snavbar-link-items">
-          <NavLink to="/change-roles">User Roles</NavLink>
-        </li>
-        <li className="Snavbar-link-items">
           <NavLink to="/user-services">Services</NavLink>
         </li>
         <li className="Snavbar-link-items">

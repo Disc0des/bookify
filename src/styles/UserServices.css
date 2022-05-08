@@ -1,0 +1,35 @@
+.user-services-page {
+  height: calc(100vh - 4rem);
+  margin-top: 4rem;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.company-title {
+  background-color: white;
+  color: var(--primary);
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.services-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100vw;
+}
+
+.services-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100vw;
+  max-height: 100vh;
+}
