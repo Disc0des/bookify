@@ -71,7 +71,7 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute path="/user-services" component={UserServices} />
-          <PrivateRoute path="/make-booking" component={UserBookings} />
+
           <PrivateRoute path="/my-calender" component={AdminCalender} />
           <PrivateRoute path="/contacts" component={AdminContacts} />
           <Container
@@ -89,6 +89,7 @@ function App() {
                 path="/update-details"
                 component={UserUpdateDetails}
               />
+              <PrivateRoute path="/make-booking" component={UserBookings} />
               <PrivateRoute
                 path="/update-calender"
                 component={AdminAddCalender}

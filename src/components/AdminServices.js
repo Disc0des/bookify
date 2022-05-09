@@ -11,7 +11,7 @@ const initialState = {
     description: "",
     duration: 0,
     price: 0,
-    calendar_id: 2,
+    calendar_id: 5,
   },
 };
 

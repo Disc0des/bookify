@@ -1,125 +1,117 @@
-import React, { useState } from "react";
+/* eslint-disable array-callback-return */
+/* eslint-disable react/jsx-no-bind */
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import Alert from "./Alert";
-import UserNavbar from "./UserNavbar";
+import DatePicker from "react-datepicker";
+import { Form, Card, Button } from "react-bootstrap";
+import logo from "../bookify-logo.png";
 import "../styles/BookingForm.css";
+import "react-datepicker/dist/react-datepicker.css";
+import Context from "../utils/Context";
 
 function UserBookings() {
+  const { userId } = useContext(Context);
   const initialState = {
-    fields: {
-      firstName: "",
-      surname: "",
-      email: "",
-      phoneNumber: "",
-      date: "",
-      services: "",
-    },
-    alert: {
-      message: "",
-      isSuccess: false,
+    bookings: {
+      booking: "",
+      service: "",
+      user_id: { userId },
+      service_id: 5,
     },
   };
 
-  const [fields, setfields] = useState(initialState.fields);
-  const [alert, setAlert] = useState(initialState.alert);
+  const [bookings] = useState(initialState.bookings);
+  const [selectedService, setSelecetedService] = useState([]);
+  const [setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [setMessage] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const handleUserBooking = (event) => {
-    event.preventDefault();
-    setAlert({ message: "", isSuccess: false });
+  useEffect(() => {
     axios
-      .post("", fields)
-      .then(() => setAlert({ message: "Booking Confirmed", isSuccess: true }))
-      .catch(() =>
-        setAlert({
-          message: "Server error, please try again later",
-          isSuccess: false,
-        })
-      );
-  };
+      .get("http://localhost:3000/api/calendars/5/services")
+      .then((res) => {
+        setSelecetedService(res.data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }, []);
 
-  const handleFieldChange = (event) => {
-    setfields({ ...fields, [event.target.name]: event.target.value });
+  function handleUserBooking(e) {
+    setError("");
+    setLoading(true);
+    e.preventDefault();
+    if (!bookings.booking || !bookings.service) {
+      setError("Please fill in all the details");
+    } else {
+      axios
+        .post("http://localhost:3000/stripe/create-checkout-session", bookings)
+        .then(() => {
+          setMessage("Service succesfully added!");
+        })
+        .catch((err) => {
+          setError(err.detail);
+        });
+
+      setLoading(false);
+    }
+  }
+
+  // const handleFieldChange = (event) => {
+  //   setBookings({ ...bookings, [event.target.title]: event.target.value });
+  // };
+
+  const openingTimes = (time) => {
+    return time.getHours() > 8 && time.getHours() < 18;
   };
 
   return (
     <div className="bookingform">
-      <Alert message={alert.message} success={alert.isSuccess} />
-      <UserNavbar />
-      <div className="container-image">
-        <div className="form-container">
-          <form
-            action=""
-            className="register-form"
-            onSubmit={handleUserBooking}
-          >
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={fields.firstName}
-              className="form-field"
-              onChange={handleFieldChange}
+      <Card>
+        <Card.Body style={{ height: "auto" }}>
+          <img src={logo} alt="bookify-logo" className="bookify-logo" />
+          <h2 className="bookingformtitle"> Make A Booking</h2>
+          <Form.Label style={{ marginBottom: "5px" }}>
+            Select Service
+          </Form.Label>
+          <Form onSubmit={handleUserBooking}>
+            <Form.Select>
+              {selectedService.map((service) => (
+                <option key={service.id} value={service.id}>
+                  {service.title}
+                </option>
+              ))}
+            </Form.Select>
+            <Form.Label style={{ marginBottom: "5px" }}>
+              Select Date & Time
+            </Form.Label>
+            <DatePicker
+              // type="text"
+              showTimeSelect={selectedDate}
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              minDate={new Date()}
+              scrollableYearDropdown
+              // placeholderText="Date"
+              value={selectedDate}
+              dateFormat="yyyy, MM, dd h:mm aa"
+              timeIntervals={60}
+              timeClassName={openingTimes}
+              // excludeTimes={openingTimes}
+              withPortal
             />
-            {fields && !fields.firstName ? (
-              <span>Must Enter First Name</span>
-            ) : null}
-            <input
-              type="text"
-              name="surname"
-              placeholder="Surname"
-              value={fields.surname}
-              className="form-field"
-              onChange={handleFieldChange}
-            />
-            {fields && !fields.surname ? <span>Must Enter Surname</span> : null}
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={fields.email}
-              className="form-field"
-              onChange={handleFieldChange}
-            />
-            {fields && !fields.email ? (
-              <span>Must Enter A Valid Email</span>
-            ) : null}
-            <input
-              type="text"
-              name="phoneNumber"
-              placeholder="Phone Number"
-              value={fields.phoneNumber}
-              className="form-field"
-              onChange={handleFieldChange}
-            />
-            {fields && !fields.phoneNumber ? (
-              <span>Must Enter Valid Number</span>
-            ) : null}
-            <input
-              type="datetime-local"
-              id="DateTimeLocal"
-              name="date"
-              placeholder="date"
-              value={fields.date}
-              className="form-field"
-              onChange={handleFieldChange}
-            />
-            {fields && !fields.date ? <span>Must Enter A Date</span> : null}
-            <input
-              name="services"
-              placeholder="Services"
-              value={fields.services}
-              className="form-field"
-              onChange={handleFieldChange}
-            />
-            {fields && !fields.time ? (
-              <span>Must Enter A Service You Require</span>
-            ) : null}
-            <button className="form-field" type="submit">
-              Confirm Appointment
-            </button>
-          </form>
-        </div>
-      </div>
+            <Button
+              disabled={loading}
+              className="w-100"
+              type="submit"
+              style={{ marginTop: "20px" }}
+            >
+              Make Booking
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
