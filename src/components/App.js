@@ -26,7 +26,8 @@ import Dashboard from "./Dashboard";
 import UserServices from "./UserServices";
 import UserBookings from "./UserBookings";
 import UserUpdateDetails from "./UserUpdateDetails";
-import UserCheckout from "./UserCheckout";
+import CheckoutSuccess from "./CheckoutSuccess";
+import CheckoutFail from "./CheckoutFail";
 
 //* Admin Page Imports
 import AdminCalender from "./AdminCalender";
@@ -71,7 +72,6 @@ function App() {
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute path="/user-services" component={UserServices} />
           <PrivateRoute path="/make-booking" component={UserBookings} />
-          <PrivateRoute path="/checkout" component={UserCheckout} />
           <PrivateRoute path="/my-calender" component={AdminCalender} />
           <PrivateRoute path="/contacts" component={AdminContacts} />
           <Container
@@ -80,6 +80,11 @@ function App() {
           >
             <div className="w-100" style={{ maxWidth: "400px" }}>
               <PrivateRoute path="/update-services" component={AdminServices} />
+              <PrivateRoute
+                path="/checkout-success"
+                component={CheckoutSuccess}
+              />
+              <PrivateRoute path="/checkout-fail" component={CheckoutFail} />
               <PrivateRoute
                 path="/update-details"
                 component={UserUpdateDetails}

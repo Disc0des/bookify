@@ -51,9 +51,6 @@ function SuperUserNavbar() {
           <NavLink to="/update-services">Update Services</NavLink>
         </li>
         <li className="Snavbar-link-items">
-          <NavLink to="/checkout">Checkout</NavLink>
-        </li>
-        <li className="Snavbar-link-items">
           <button
             type="submit"
             className="Slogout-button"

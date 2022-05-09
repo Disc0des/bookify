@@ -44,9 +44,6 @@ function UserNavbar() {
           <NavLink to="/update-details">My Details</NavLink>
         </li>
         <li className="navbar-link-items">
-          <NavLink to="/checkout">Checkout</NavLink>
-        </li>
-        <li className="navbar-link-items">
           <button
             type="submit"
             className="logout-button"
