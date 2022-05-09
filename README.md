@@ -1,6 +1,37 @@
-# Getting Started with Create React App
+# :calendar: Welcome to Bookify!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend Repo for our Final Project with Manchester Codes, Bookify is an app designed for small businesses to advertise the range of services they have to offer and manage their bookings in a calendar, and for customers to view these services and arrange appointments.
+
+## Tech Stack
+
+HTML CSS JavaScript and React
+
+## Packages Used
+
+- react-scheduler
+- axios
+- bootstrap
+- jwt-decode
+- material-ui
+- moment
+- react-router-dom
+- react-icons
+
+## Screenshots
+
+![](./src/bookify-logo.png)
+
+![](./Screenshot1.png)
+
+![](./Screenshot2.png)
+
+![](./Screenshot3.png)
+
+## Getting Started!
+
+You will first need to clone down the back end repo, `git clone https://github.com/invertostew/bookify-backend`. use `cd bookify-backend` to move into this repo and then run `npm install` to install all the depedancies. Follow the instructions on the README.md file this repo to initialise a docker container which will run the PostgreSQL database, and `npm run start:dev` to start the server locally : This must be running on port 3000
+
+Next clone down this repo `git clone https://github.com/Disc0des/bookify` use `cd bookify` then `npm install` again to install the dependacies for the frontend. From here you can run the scripts below.
 
 ## Available Scripts
 
@@ -8,26 +39,18 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in the development mode. Should not be run on localhost:3000
 
-The page will reload when you make changes.\
+The page will reload when you make changes.
 You may also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `build` folder.
 
 ### `npm run eject`
 
@@ -39,32 +62,8 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+# Authors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Nathan Humphreys
+Dan Hembery
+Stuart Green
