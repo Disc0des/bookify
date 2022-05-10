@@ -16,7 +16,7 @@ function AdminCalender() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/calendars/CALENDAR/bookings")
+      .get("http://localhost:3000/api/calendars/1/services")
       .then((res) => {
         const bookings = res.data;
         return bookings;
