@@ -42,7 +42,7 @@ function SuperUserNavbar() {
           <NavLink to="/update-details">My Details</NavLink>
         </li>
         <li className="Snavbar-link-items">
-          <NavLink to="/my-calender">My Calender</NavLink>
+          <NavLink to="/my-calender">My Calendar</NavLink>
         </li>
         <li className="Snavbar-link-items">
           <NavLink to="/contacts">Contacts</NavLink>

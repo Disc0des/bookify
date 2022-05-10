@@ -80,7 +80,7 @@ function AdminAddCalender() {
               type="submit"
               style={{ marginTop: "20px" }}
             >
-              Add Calender
+              Add Calendar
             </Button>
           </Form>
         </Card.Body>

@@ -37,10 +37,10 @@ function AdminNavbar() {
           </NavLink>
         </li>
         <li className="navbar-link-items">
-          <NavLink to="/my-calender">My Calender</NavLink>
+          <NavLink to="/my-calender">My Calendar</NavLink>
         </li>
         <li className="navbar-link-items">
-          <NavLink to="/update-calender">Add Calender</NavLink>
+          <NavLink to="/update-calender">Add Calendar</NavLink>
         </li>
         <li className="navbar-link-items">
           <NavLink to="/contacts">Contacts</NavLink>
