@@ -1,8 +1,10 @@
+/* eslint-disable no-shadow */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
+import dateFormat from "dateformat";
 import { Form, Card, Button } from "react-bootstrap";
 import logo from "../bookify-logo.png";
 import "../styles/BookingForm.css";
@@ -14,57 +16,59 @@ function UserBookings() {
   const initialState = {
     bookings: {
       booking: "",
-      service: "",
-      user_id: { userId },
-      service_id: 5,
+      user_id: userId,
+      service_id: 1,
     },
   };
 
   const [bookings] = useState(initialState.bookings);
   const [selectedService, setSelecetedService] = useState([]);
-  const [setError] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [setMessage] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
+    console.log(dateFormat(selectedDate, "isoDateTime"));
     axios
       .get("http://localhost:3000/api/calendars/1/services")
       .then((res) => {
         setSelecetedService(res.data);
       })
       .catch((err) => {
-        setError(err.message);
+        console.log(err);
+        setError("error");
       });
-  }, []);
+  }, [selectedDate]);
 
   function handleUserBooking(e) {
+    e.preventDefault();
+    console.log(error);
     setError("");
     setLoading(true);
-    e.preventDefault();
-    if (!bookings.booking || !bookings.service) {
-      setError("Please fill in all the details");
-    } else {
-      axios
-        .post("http://localhost:3000/stripe/create-checkout-session", bookings)
-        .then(() => {
-          setMessage("Service succesfully added!");
-        })
-        .catch((err) => {
-          setError(err.detail);
-        });
 
-      setLoading(false);
-    }
+    // if (!bookings.booking) {
+    //   setError("Please fill in all the details");
+    // } else {
+    axios
+      .post("http://localhost:3000/stripe/create-checkout-session", {
+        booking: dateFormat(selectedDate, "isoDateTime"),
+        user_id: bookings.user_id,
+        service_id: bookings.service_id,
+      })
+      .then((res) => {
+        console.log(res.data.url);
+        window.open(res.data.url);
+        setMessage("Service succesfully added!");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("error");
+      });
+
+    setLoading(false);
+    // }
   }
-
-  // const handleFieldChange = (event) => {
-  //   setBookings({ ...bookings, [event.target.title]: event.target.value });
-  // };
-
-  const openingTimes = (time) => {
-    return time.getHours() > 8 && time.getHours() < 18;
-  };
 
   return (
     <div className="bookingform">
@@ -90,14 +94,14 @@ function UserBookings() {
               // type="text"
               showTimeSelect={selectedDate}
               selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
+              onChange={(selectedDate) => setSelectedDate(selectedDate)}
               minDate={new Date()}
               scrollableYearDropdown
               // placeholderText="Date"
               value={selectedDate}
-              dateFormat="yyyy, MM, dd h:mm aa"
+              dateFormat="yyyy-mm-dd HH:mm:ss"
               timeIntervals={60}
-              timeClassName={openingTimes}
+              // timeClassName={openingTimes}
               // excludeTimes={openingTimes}
               withPortal
             />
