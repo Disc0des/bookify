@@ -65,5 +65,5 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 # Authors
 
 Nathan Humphreys
-Dan Hembery
+Dan Hembery and
 Stuart Green

@@ -29,7 +29,7 @@ function UserBookings() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/calendars/5/services")
+      .get("http://localhost:3000/api/calendars/CALENDAR/services")
       .then((res) => {
         setSelecetedService(res.data);
       })
