@@ -30,9 +30,9 @@ function AdminAddCalender() {
       setError("Please fill in all the details");
     } else {
       axios
-        .post("http://localhost:3000/api/calendars", calender)
+        .post("https://bookify-be.herokuapp.com/api/calendars", calender)
         .then(() => {
-          setMessage("Service succesfully added!");
+          setMessage("Service successfully added!");
           setTimeout(messageTimeout, 2000);
         })
         .catch((err) => {

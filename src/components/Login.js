@@ -22,7 +22,7 @@ export default function Login() {
     setLoading(true);
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/users/authenticate", details)
+      .post("https://bookify-be.herokuapp.com/api/users/authenticate", details)
       .then((res) => {
         setStoredToken(res.data.token);
         setLoading(false);
@@ -42,9 +42,11 @@ export default function Login() {
     const decodedToken = jwtDecode(storedToken);
     const { user_id, role_id } = decodedToken;
     setUserId(user_id);
-    axios.get(`http://localhost:3000/api/roles/${role_id}`).then((res) => {
-      setUserRole(res.data.role);
-    });
+    axios
+      .get(`https://bookify-be.herokuapp.com/api/roles/${role_id}`)
+      .then((res) => {
+        setUserRole(res.data.role);
+      });
     return null;
   }, [storedToken]);
 

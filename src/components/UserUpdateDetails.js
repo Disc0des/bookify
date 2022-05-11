@@ -49,7 +49,7 @@ function UserUpdateDetails() {
       setError("Please fill in all the details");
     } else {
       axios
-        .post("http://localhost:3000/api/users", fields)
+        .post("https://bookify-be.herokuapp.com/api/users", fields)
         .then(() => {
           setMessage("Your delivery details have been updted");
           setTimeout(messageTimeout, 2000);

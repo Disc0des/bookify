@@ -38,9 +38,9 @@ function AdminServices() {
       setError("Please fill in all the details");
     } else {
       axios
-        .post("http://localhost:3000/api/services", service)
+        .post("https://bookify-be.herokuapp.com/api/services", service)
         .then(() => {
-          setMessage("Service succesfully added!");
+          setMessage("Service successfully added!");
           setTimeout(messageTimeout, 2000);
         })
         .catch((err) => {

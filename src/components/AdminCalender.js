@@ -16,7 +16,7 @@ function AdminCalender() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/calendars/1/services")
+      .get("https://bookify-be.herokuapp.com/api/calendars/1/bookings")
       .then((res) => {
         const bookings = res.data;
         return bookings;
