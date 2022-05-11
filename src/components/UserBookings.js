@@ -5,7 +5,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import dateFormat from "dateformat";
-import { Form, Card, Button } from "react-bootstrap";
+import { Form, Card, Button, Alert } from "react-bootstrap";
 import logo from "../bookify-logo.png";
 import "../styles/BookingForm.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -25,49 +25,40 @@ function UserBookings() {
   const [selectedService, setSelecetedService] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [setMessage] = useState("");
+  const [message, setMessage] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
-    console.log(dateFormat(selectedDate, "isoDateTime"));
+    // console.log(dateFormat(selectedDate, "isoDateTime"));
     axios
-      .get("http://localhost:3000/api/calendars/1/services")
+      .get("https://bookify-be.herokuapp.com/api/calendars/1/services")
       .then((res) => {
         setSelecetedService(res.data);
       })
       .catch((err) => {
-        console.log(err);
-        setError("error");
+        setError(err.detail);
       });
   }, [selectedDate]);
 
   function handleUserBooking(e) {
     e.preventDefault();
-    console.log(error);
     setError("");
     setLoading(true);
-
-    // if (!bookings.booking) {
-    //   setError("Please fill in all the details");
-    // } else {
     axios
-      .post("http://localhost:3000/stripe/create-checkout-session", {
+      .post("https://bookify-be.herokuapp.com/stripe/create-checkout-session", {
         booking: dateFormat(selectedDate, "isoDateTime"),
         user_id: bookings.user_id,
         service_id: bookings.service_id,
       })
       .then((res) => {
-        console.log(res.data.url);
         window.open(res.data.url);
-        setMessage("Service succesfully added!");
+        setMessage("Service successfully added!");
       })
       .catch((err) => {
-        console.log(err);
-        setError("error");
+        setError(err.detail);
       });
 
     setLoading(false);
-    // }
   }
 
   return (
@@ -75,7 +66,16 @@ function UserBookings() {
       <Card>
         <Card.Body style={{ height: "auto" }}>
           <img src={logo} alt="bookify-logo" className="bookify-logo" />
-          <h2 className="bookingformtitle"> Make A Booking</h2>
+          {error && (
+            <Alert variant="danger" style={{ textAlign: "center" }}>
+              {error}
+            </Alert>
+          )}
+          {message && (
+            <Alert variant="success" style={{ textAlign: "center " }}>
+              {message}
+            </Alert>
+          )}
           <Form.Label style={{ marginBottom: "5px" }}>
             Select Service
           </Form.Label>
@@ -91,18 +91,14 @@ function UserBookings() {
               Select Date & Time
             </Form.Label>
             <DatePicker
-              // type="text"
               showTimeSelect={selectedDate}
               selected={selectedDate}
               onChange={(selectedDate) => setSelectedDate(selectedDate)}
               minDate={new Date()}
               scrollableYearDropdown
-              // placeholderText="Date"
               value={selectedDate}
-              dateFormat="yyyy-mm-dd HH:mm:ss"
+              dateFormat="yyyy-MM-dd HH:mm:ss"
               timeIntervals={60}
-              // timeClassName={openingTimes}
-              // excludeTimes={openingTimes}
               withPortal
             />
             <Button
